@@ -1,53 +1,37 @@
 @echo off
-REM GrowDev Project Setup Script for Windows
-REM This script helps set up the GrowDev Laravel + Vue.js project
+REM GrowDev Project Quick Start Script
+echo 🚀 GrowDev Project Quick Start
+echo ===============================
 
-echo 🚀 GrowDev Project Setup
-echo =========================
+echo 📋 Checking project status...
 
-REM Check prerequisites
-echo.
-echo 📋 Checking prerequisites...
-
-where php >nul 2>nul
-if %errorlevel% neq 0 (
-    echo ❌ PHP is not installed or not in PATH
-    echo    Please install PHP 8.3 or higher
-    pause
-    exit /b 1
-) else (
-    echo ✅ PHP found
-    php --version | findstr /C:"PHP"
+REM Check if dependencies are installed
+if not exist "vendor\" (
+    echo 📦 Installing PHP dependencies...
+    php composer install --no-dev --optimize-autoloader
 )
 
-where composer >nul 2>nul
-if %errorlevel% neq 0 (
-    echo ⚠️ Composer not found in PATH, checking for local installation...
-    if exist "composer.phar" (
-        echo ✅ Local Composer found
-        set COMPOSER_CMD=php composer.phar
-    ) else if exist "composer" (
-        echo ✅ Local Composer found
-        set COMPOSER_CMD=php composer
-    ) else (
-        echo 📦 Installing Composer locally...
-        powershell -Command "Invoke-WebRequest -Uri 'https://getcomposer.org/installer' -OutFile 'composer-setup.php'" >nul 2>nul
-        if exist "composer-setup.php" (
-            php composer-setup.php --install-dir=. --filename=composer --quiet
-            del composer-setup.php
-            if exist "composer" (
-                echo ✅ Composer installed locally
-                set COMPOSER_CMD=php composer
-            ) else (
-                echo ❌ Failed to install Composer
-                echo    Please install Composer manually from https://getcomposer.org/
-                pause
-                exit /b 1
-            )
-        ) else (
-            echo ❌ Failed to download Composer installer
-            echo    Please install Composer manually from https://getcomposer.org/
-            pause
+if not exist "node_modules\" (
+    echo 📦 Installing Node.js dependencies...
+    npm install
+)
+
+REM Clear caches and build assets
+echo 🧹 Clearing caches...
+php artisan config:clear
+php artisan route:clear
+
+echo 🔨 Building frontend assets...
+npm run build
+
+echo � Checking application key...
+php artisan key:generate --show >nul 2>nul || php artisan key:generate
+
+echo ✅ Project ready!
+echo 🌐 Starting development server...
+echo    Visit: http://127.0.0.1:8000
+echo.
+php artisan serve
             exit /b 1
         )
     )
