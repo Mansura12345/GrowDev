@@ -1,61 +1,267 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# GrowDev - Professional CV Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A modern Laravel application with TOTP-based authentication and professional CV management features.
 
-## About Laravel
+## 🌟 Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### 🔐 Authentication
+- **TOTP-based Authentication**: Two-factor authentication using Google Authenticator
+- **Direct TOTP Password Reset**: Reset passwords without email verification
+- **Rate Limiting**: 3 attempts per minute on TOTP verification
+- **5-minute Session Timeout**: For enhanced security
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 📄 CV Management
+- **Professional CV Editing**: Comprehensive CV builder with multiple sections
+- **Work Experience**: Track job positions with dates and descriptions
+- **Education**: Manage educational background and credentials
+- **Skills**: Add skills with proficiency levels (Beginner/Intermediate/Advanced/Expert)
+- **Certifications**: Store certifications with issue/expiry dates and credentials
+- **PDF Export**: Download CV as professionally formatted PDF
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 🎨 User Interface
+- **Responsive Design**: Built with Tailwind CSS
+- **Live Preview**: See changes in real-time as you edit
+- **Dynamic Form Sections**: Add/remove work experience, education, skills, certifications
+- **Modern UI Components**: Clean, intuitive interface
 
-## Learning Laravel
+## 🛠️ Tech Stack
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **Laravel**: 12.34.0
+- **PHP**: 8.4.13
+- **Database**: MySQL
+- **Frontend**: Tailwind CSS, Blade Templates
+- **PDF Generation**: barryvdh/laravel-dompdf
+- **Authentication**: TOTP (pragmarx/google2fa)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## 📦 Installation
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Prerequisites
+- PHP 8.4+
+- MySQL 8.0+
+- Composer
+- Node.js & NPM (optional, for frontend build)
 
-## Laravel Sponsors
+### Setup Steps
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd GrowDev
+   ```
 
-### Premium Partners
+2. **Install dependencies**
+   ```bash
+   composer install
+   npm install
+   ```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+3. **Environment Configuration**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-## Contributing
+4. **Database Setup**
+   ```bash
+   php artisan migrate
+   php artisan db:seed --class=TestUserSeeder
+   ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+5. **Build assets**
+   ```bash
+   npm run build
+   ```
 
-## Code of Conduct
+6. **Start the development server**
+   ```bash
+   php artisan serve
+   ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Access the application at `http://127.0.0.1:8000`
 
-## Security Vulnerabilities
+## 👤 Default Test Account
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- **Email**: test@example.com
+- **Password**: password
 
-## License
+## 📖 Usage
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Register a New Account
+
+1. Go to `/register`
+2. Enter your details
+3. Set up TOTP (scan QR code with Google Authenticator)
+4. Complete registration
+
+### Edit Your CV
+
+1. Log in to the application
+2. Navigate to `/profile`
+3. Fill in your personal information
+4. Add work experience, education, skills, and certifications
+5. Click **Save Changes** to persist your data
+
+### Export CV as PDF
+
+1. Go to `/profile`
+2. Click the **Export PDF** button (top right)
+3. Your CV will download as `CV_[YourName]_[Date].pdf`
+
+### Password Reset (TOTP-based)
+
+1. Go to `/forgot-password`
+2. Enter your email
+3. Enter your TOTP code from Google Authenticator
+4. Set your new password
+5. You'll be logged in automatically
+
+## 📊 Database Schema
+
+### Users Table
+- Basic user information (name, email, password)
+- TOTP secret for 2FA
+- CV fields: phone_number, professional_summary, location, website, linkedin_url, github_url
+
+### CV Tables
+- **work_experiences**: Job positions with dates
+- **educations**: Educational background
+- **skills**: Skills with proficiency levels
+- **certifications**: Certifications and credentials
+
+All CV tables include cascading delete for data integrity.
+
+## 📁 File Structure
+
+```
+GrowDev/
+├── app/
+│   ├── Http/Controllers/
+│   │   └── ProfileController.php      # CV management
+│   └── Models/
+│       ├── User.php
+│       ├── WorkExperience.php
+│       ├── Education.php
+│       ├── Skill.php
+│       └── Certification.php
+├── database/
+│   ├── migrations/                    # Database schema
+│   └── seeders/
+│       └── TestUserSeeder.php         # Test data
+├── resources/views/
+│   ├── profile/
+│   │   ├── edit.blade.php            # CV editor
+│   │   └── partials/                 # Form components
+│   └── cv/
+│       └── pdf.blade.php             # PDF template
+├── routes/
+│   └── web.php                        # Application routes
+└── README.md                          # This file
+```
+
+## 🛣️ Routes
+
+### Authentication
+- `GET /register` - Registration form
+- `POST /register` - Create account
+- `GET /register/totp-setup` - TOTP setup page
+- `POST /register/totp-setup` - Verify TOTP setup
+
+### Profile & CV
+- `GET /profile` - CV editor
+- `PUT /profile` - Save CV changes
+- `GET /profile/cv-pdf` - Download CV as PDF
+
+### Dashboard
+- `GET /dashboard` - User dashboard
+- `GET /` - Welcome page
+
+## ✅ API Validation Rules
+
+### Profile Update (PUT /profile)
+
+**Personal Information**
+- `name`: required, string, max 255
+- `email`: required, email, unique (per user)
+- `phone_number`: nullable, string, max 20
+- `professional_summary`: nullable, string, max 1000
+- `location`: nullable, string, max 255
+- `website`: nullable, URL
+- `linkedin_url`: nullable, URL
+- `github_url`: nullable, URL
+
+**Work Experience**
+- `job_title`: required, string, max 255
+- `company_name`: required, string, max 255
+- `description`: nullable, string
+- `start_date`: required, date
+- `end_date`: nullable, date
+- `currently_working`: boolean
+
+**Education**
+- `school_name`: required, string, max 255
+- `degree`: required, string, max 255
+- `field_of_study`: required, string, max 255
+- `description`: nullable, string
+- `start_date`: required, date
+- `end_date`: required, date
+
+**Skills**
+- `skill_name`: required, string, max 255
+- `proficiency`: required, enum (beginner, intermediate, advanced, expert)
+
+**Certifications**
+- `certification_name`: required, string, max 255
+- `issuer`: required, string, max 255
+- `description`: nullable, string
+- `issue_date`: required, date
+- `expiry_date`: nullable, date
+- `credential_url`: nullable, URL
+
+## 🔒 Security Considerations
+
+- All CV data is private and user-specific
+- TOTP-based 2FA prevents unauthorized access
+- Password reset requires TOTP verification
+- Email validation prevents fake accounts
+- Database transactions ensure data consistency
+- XSS prevention through Blade templating
+- CSRF token validation on all forms
+
+## 🚀 Development
+
+### Clear Cache
+```bash
+php artisan config:clear
+php artisan view:clear
+php artisan route:clear
+```
+
+### Run Tests
+```bash
+php artisan test
+```
+
+### Database Refresh
+```bash
+php artisan migrate:refresh --seed
+```
+
+## 🐛 Troubleshooting
+
+### TOTP Setup Issues
+- Ensure your device clock is synchronized
+- Try adding the account manually if QR code scan fails
+- Use the backup codes for emergency access
+
+### PDF Export Not Working
+- Ensure the PDF library is installed: `composer require barryvdh/laravel-dompdf`
+- Check write permissions on storage directory
+
+### Database Connection Issues
+- Verify MySQL is running
+- Check `.env` database credentials
+- Run migrations: `php artisan migrate`
+
+## 📝 License
+
+This project is open source and available under the MIT license.
