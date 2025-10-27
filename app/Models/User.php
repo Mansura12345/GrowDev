@@ -94,4 +94,20 @@ class User extends Authenticatable
     {
         return $this->hasMany(Certification::class)->orderBy('order');
     }
+
+    /**
+     * Get the SRS documents for the user.
+     */
+    public function srsDocuments(): HasMany
+    {
+        return $this->hasMany(SrsDocument::class);
+    }
+
+    /**
+     * Get the SDD documents for the user.
+     */
+    public function sddDocuments(): HasMany
+    {
+        return $this->hasMany(SddDocument::class);
+    }
 }

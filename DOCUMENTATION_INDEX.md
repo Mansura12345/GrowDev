@@ -252,5 +252,47 @@ For any questions or issues:
 
 ---
 
+## 📄 NEW: Documentation Feature (October 21, 2025)
+
+### 🎉 SRS & SDD Document Management System
+
+A complete professional documentation system for creating Software Requirements Specifications (SRS) and Software Design Descriptions (SDD).
+
+**For detailed information, see:**
+- **[COMPLETION_SUMMARY.txt](COMPLETION_SUMMARY.txt)** - Quick overview (START HERE!)
+- **[DOCUMENTATION_FEATURE.md](DOCUMENTATION_FEATURE.md)** - Complete user guide
+- **[ARCHITECTURE.md](ARCHITECTURE.md)** - Technical architecture
+- **[TESTING_GUIDE.md](TESTING_GUIDE.md)** - 28 test cases
+- **[IMPLEMENTATION_SUMMARY.txt](IMPLEMENTATION_SUMMARY.txt)** - Details & statistics
+
+### ✨ Key Features
+
+📋 **SRS Documents**
+  - Functional requirements management
+  - 🎨 UX Considerations (easy add/remove)
+  - Priority levels (Low, Medium, High, Critical)
+  - Professional PDF export
+
+🏗️ **SDD Documents**
+  - Component management
+  - ✨ AI Text-to-Diagram conversion
+  - 📐 Manual Mermaid diagrams
+  - Flowchart, Sequence, Class, State diagrams
+  - PDF export with embedded diagrams
+
+🌐 **Homepage Integration**
+  - "Create Documentation" dropdown button
+
+### 🚀 Quick Start
+
+1. http://127.0.0.1:8000
+2. Login to account
+3. Click green "📄 Create Documentation" button
+4. Choose SRS or SDD
+5. Create and export as PDF!
+
+---
+
 **Last Updated**: October 21, 2025  
 **Project Status**: Clean & Production-Ready ✅
+**NEW**: Documentation Feature Complete ✨
