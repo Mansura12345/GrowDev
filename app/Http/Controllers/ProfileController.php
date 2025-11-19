@@ -25,7 +25,7 @@ class ProfileController extends Controller
     $user = Auth::user();
     $originalEmail = $user->email;
 
-        return view('pages.user.profile', [
+        return view('profile.edit', [
             'user' => $user,
             'workExperiences' => $user->workExperiences()->get(),
             'educations' => $user->educations()->get(),
